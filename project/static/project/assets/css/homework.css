@@ -53,28 +53,10 @@
     border-radius: 5px;
     margin-bottom: 10px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 600;
     color: #ffffff;
-    font-family: "Nunito", sans-serif;
 }
-
-.submit-button:hover
-{
-    display: inline-block;
-    padding: 8px 20px;
-    background: #0d6efd;
-    text-align: center;
-    border: 2px solid #0d6efd;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 600;
-    color: #ffffff;
-    font-family: "Nunito", sans-serif;
-}
-
 input[type='file'] {
     display: none;
 }
@@ -91,20 +73,7 @@ input[type='file'] {
     font-weight: 600;
     color: #ffffff;
 }
-.card {
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    overflow: hidden;
-    border-radius: 15px;
-    padding: 10px 0;
-    background: #0d6efd;
-}
-.main-text h2 {
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 24px;
-    color: white;
-    margin: 20px 28px 20px 28px;
-}
+
 /**
 .submit-button
 {
