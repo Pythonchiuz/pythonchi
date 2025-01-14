@@ -1,0 +1,12 @@
+{% load static %}
+
+{% block logout %}
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'logout' student_id=user.student_id %}">
+          <i class="bi bi-box-arrow-in-right"></i>
+          <span>Akkauntdan chiqish</span>
+        </a>
+      </li>
+
+{% endblock logout %}

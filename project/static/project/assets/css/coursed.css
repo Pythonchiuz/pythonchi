@@ -1,0 +1,11 @@
+body {
+    background: #f6f9ff;
+}
+
+.list-group-item {
+    padding: 1rem 1rem;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: "Nunito", sans-serif;
+    color: #012970;
+}

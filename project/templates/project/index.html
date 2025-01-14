@@ -1,0 +1,673 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset=UTF-8>
+    <meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1">
+    <meta http-equiv=X-UA-Compatible content="ie=edge">
+    <title>Home | Edison</title>
+    <script id=www-widgetapi-script src=https://s.ytimg.com/yts/jsbin/www-widgetapi-vflS50iB-/www-widgetapi.js async=""></script>
+    <script src=https://www.youtube.com/player_api></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+    <link rel="stylesheet preload" as=style href={% static 'project/assets/css/preload.min.css' %}>
+    <link rel="stylesheet preload" as=style href={% static 'project/assets/css/icomoon.css' %}>
+    <link rel="stylesheet preload" as=style href={% static 'project/assets/css/lib.min.css' %}>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel=stylesheet href={% static 'project/assets/css/index.css' %}>
+    <link rel=stylesheet href={% static 'project/assets/css/floatbutton.min.css' %}>
+    <link href="{% static 'project/assets/img/snakeing.png' %}" rel="icon">
+</head>
+<body>
+
+<header class=header data-page=home>
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+        <div class="logo header_logo">
+            <a class="d-inline-flex align-items-center" href=index.html>
+                <span class=logo_picture><img src={% static 'project/assets/img/pythonchi-logo.png' %} alt=Edison> </span>
+            </a>
+        </div>
+        <button class=header_trigger type=button data-bs-toggle=collapse data-bs-target=#headerMenu aria-controls=headerMenu>
+            <span class=line></span>
+            <span class=line></span>
+            <span class=line></span>
+        </button>
+        <nav class="header_nav collapse" id=headerMenu>
+            <ul class=header_nav-list>
+                <li class=header_nav-list_item>
+                    <a class=nav-item href=#home>Bosh Sahifa</a>
+                </li>
+                <li class=header_nav-list_item>
+                    <a class=nav-item href=#about>Biz Haqimizda</a>
+                </li>
+
+
+
+                <li class=header_nav-list_item>
+                    <a class=nav-item href=#course>Kurslarimiz</a>
+                </li>
+                <li class=header_nav-list_item>
+                    <a class=nav-item href=#contact>Bog'lanish</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="header_nav-list_item">
+                    <a class="btn" style="height: 50px;background: #2575fc;color: #ffffff;" href="{% url 'profile' student_id=user.student_id %}">{{ user.username }}</a>
+                </li>
+                {% else %}
+                <li class="header_nav-list_item dropdown">
+                    <a class="btn btn--yellow dropdown-toggle d-inline-flex align-items-center" style="height: 50px" href="{% url 'signup' %}" data-bs-toggle=collapse data-bs-target=#coursesMenu data-trigger=dropdown aria-expanded=false aria-controls=coursesMenu data-page=courses>Ro'yxatdan O'tish</a>
+                    <div class="dropdown-menu collapse" id=coursesMenu>
+                        <ul class=dropdown-list>
+                            <li class=list-item data-main=true>
+                                <a class="dropdown-item nav-item" data-page=courses href="{% url 'signup' %}" data-main=true>Ro'yxatdan O'tish</a>
+                            </li>
+                            <li class=list-item>
+                                <a class="dropdown-item nav-item" data-page=course href="{% url 'login' %}">Student Panelga Kirish</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                {% endif %}
+            </ul>
+
+        </nav>
+    </div>
+</header>
+<main>
+    <div class=underlay>
+
+    </div>
+    <section class=hero id="home">
+        <div class="container d-lg-flex align-items-center">
+            <div class=hero_content>
+                <h1 class=hero_content-header data-aos=fade-up>Biz bilan Pythonchilar oilasiga qo'shiling.</h1>
+                <p class=hero_content-text data-aos=fade-up data-aos-delay=50>Onlayn ta'lim va offline eventlarga
+                    ega birinchi Python dasturlash tiliga asoslangan kurs.
+                </p>
+                <div class="hero_content-action d-flex flex-wrap">
+                    <a class="btn btn--highlight" href={% url 'signup' %} data-aos=fade-left data-aos-delay=50>
+                        <span class=text>Pythonchi bo'lish</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero_media col-lg-6">
+                <lottie-player src={% static 'project/assets/img/lottie/hero.json' %} background=transparent speed=1 style="width: 100%; height: 100%" loop autoplay></lottie-player>
+            </div>
+        </div>
+    </section>
+    <div class=features>
+        <div class=container>
+            <ul class="features_list d-md-flex flex-wrap">
+                <li class="features_list-item col-md-4" data-order=3 data-aos=fade-up>
+                    <div class=card>
+                        <div class=content>
+                            <div class=card_media>
+                                <i class="icon-headset-solid icon"></i>
+                            </div>
+                            <div class=card_main>
+                                <h5 class=card_main-title>Jonli onlayn darslar</h5>
+                                <p class=card_main-text>O'quv jarayoni mentor bilan onlayn tarzda, nazariy bilimlar
+                                    va amaliy mashqlarni o'rgatish orqali olib boriladi.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="features_list-item col-md-4" data-order=2 data-aos=fade-up>
+                    <div class=card>
+                        <div class=content>
+                            <div class=card_media>
+                                <i class="icon-code-solid icon"></i>
+                            </div>
+                            <div class=card_main>
+                                <h5 class=card_main-title>O'quvchilarni qo'llab-quvvatlash</h5>
+                                <p class=card_main-text>Har bir darsning videosi yozib olinadi va dars davomida
+                                    ishlatilgan barcha kodlar ham platformaga yuklanadi.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="features_list-item col-md-4" data-order=1 data-aos=fade-up>
+                    <div class=card>
+                        <div class=content>
+                            <div class=card_media>
+                                <i class="icon-user-graduate-solid icon"></i>
+                            </div>
+                            <div class=card_main>
+                                <h5 class=card_main-title>Sertifikat bilan taqdirlash</h5>
+                                <p class=card_main-text>Kurs so'nggida barcha kurslarni muvaffaqiyatli pythonchilar
+                                    sertifikat bilan taqdirlanishadi.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <section class=promo id="about">
+        <div class="container d-flex flex-column-reverse flex-lg-row justify-content-lg-end">
+            <div class=promo_media>
+                <lottie-player src={% static 'project/assets/img/lottie/scene.json' %} background=transparent speed=1 style="width: 100%; height: 100%" loop autoplay></lottie-player>
+            </div>
+            <div class=promo_content>
+                <h2 class=promo_content-header data-aos=fade-left>Onlayn ta'lim oling va biz bilan pythonchiga aylaning</h2>
+                <p class=promo_content-text data-aos=fade-up data-aos-delay=50>Qulay platforma va muhitda o'zingiz
+                    qiziqqan dasturlash tilining bir qismi bo'ling. Bu nafaqat onlayn kurs bu Pythonchilar Oilasi.
+                    Shuning uchun networking va team buildingni rivojlantirish maqsadida pythonchilar bilan uchrashuvlar,
+                    dasturlash va sport musobaqalar kabi offline eventlar ham bo'lib o'tadi.
+                </p>
+
+                <a class="promo_content-btn btn btn--gradient" href={% url 'signup' %} data-aos=fade-up data-aos-delay=100>
+                    <span class=text>Bizning kurslar</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <section class=about id="coursed">
+        <div class=container>
+            <div class=about_deco>
+                <lottie-player src={% static 'project/assets/img/lottie/wave.json' %} background=transparent speed=1 style="width: 100%; height: 100%" loop autoplay></lottie-player>
+            </div><div class=about_main>
+            <div class=content>
+                <h2 class=about_main-header data-aos=fade-in>Kurs davomida</h2>
+                <ul class=about_main-list>
+                    <li class=about_main-list_item data-aos=fade-up>
+                        <i class="icon-check icon"></i>
+                        <div class=content>
+                            <h5 class=title>Barcha darslar mentor bilan onlayn tarzda bo'lib o'tadi</h5>
+                        </div>
+                    </li>
+                    <li class=about_main-list_item data-aos=fade-up data-aos-delay=50>
+                        <i class="icon-check icon"></i>
+                        <div class=content>
+                            <h5 class=title>Interaktiv platformada har bir darsning teoriyasi, video yozuvi va kodlar joylashtiriladi</h5>
+                        </div>
+                    </li>
+                    <li class=about_main-list_item data-aos=fade-up data-aos-delay=100>
+                        <i class="icon-check icon"></i>
+                        <div class=content>
+                            <h5 class=title>Kurslarnini tugatib, barcha darslarni muvaffaqiyatli bajargan pythonchilar sertifikat bilan taqdirlanishadi</h5>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+            <div class=about_review data-aos=zoom-in>
+                <div class=about_review-wrapper>
+                    <div class=media>
+                        <picture>
+                            <source data-srcset={% static 'project/assets/img/me.jpeg' %} srcset={% static 'project/assets/img/me.jpeg' %}>
+                            <img class=lazy data-src={% static 'project/assets/img/meme.jpeg' %} src={% static 'project/assets/img/me.jpeg' %} alt=media>
+                        </picture>
+                    </div>
+                    <div class=main>
+                        <h5 class=main_name>Pythonchi.uz asoschisi</h5>
+                        <ul class="rating d-flex align-items-center">
+                            <li class=rating_star>
+                                <i class="icon-star icon"></i>
+                            </li>
+                            <li class=rating_star>
+                                <i class="icon-star icon"></i>
+                            </li>
+                            <li class=rating_star>
+                                <i class="icon-star icon"></i>
+                            </li>
+                            <li class=rating_star>
+                                <i class="icon-star icon"></i>
+                            </li>
+                            <li class=rating_star>
+                                <i class="icon-star icon"></i>
+                            </li>
+                        </ul>
+                        <q class="main_review quote">“Maqsadimiz O'zbekistonda pythonga asoslangan sifatli onlayn
+                            ta'limni rivojlantirishga va python dasturlash tiliga bo'lgan qiziqishini oshirishga
+                            qaratilgan.”</q>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class=popular id="course">
+        <div class=container>
+            <div class=popular_header>
+                <h2 class=popular_header-title data-aos=fade-up>Bizning kurslarimiz</h2>
+            </div>
+            <ul class="popular_list d-md-flex flex-wrap">
+                {% for course in courses %}
+                    {% if course.name == "Python Basic" %}
+                <li class="popular_list-card course-card col-12 col-md-6 col-lg-4" data-aos=fade-up data-aos-delay=50>
+                    <div class=course-card_wrapper>
+                        <div class="top d-flex align-items-start">
+                            <span class="top_icon top_icon--blue">
+                                <picture>
+                                    <source data-srcset={% static 'project/assets/img/python-logo.png' %} srcset={% static 'project/assets/img/python-logo.png' %}>
+                                    <img class=lazy data-src={% static 'project/assets/img/python-logo.png' %} src={% static 'project/assets/img/python-logo.png' %} alt=media>
+                                </picture>
+                            </span>
+                            <div class="wrapper d-flex flex-column">
+                                <h5 class=top_title style="font-size: 27px; line-height: 27px">Python <br> Basic</h5>
+                                <span class=top_author>Pythonchi.uz</span>
+                            </div>
+                        </div>
+                        <div class=pricing>
+                            <span class="pricing_price h5">Darslar soni: {{ course.count_lesson }}</span>
+                        </div>
+                        <div class=bottom>
+                            <ul class=bottom_list>
+                                <li class="bottom_list-item d-flex align-items-start">
+                                    <i class="bottom_list-item_marker icon-circle"></i>
+                                    <p class=bottom_list-item_text>{{ course.description }}</p>
+                                </li>
+                            </ul>
+                            <ul class=botom_list style="border-top: 1px solid gray">
+                                <li class="botom_list-item d-flex align-items-start">
+                                    {% if course.course_start is not None %}
+                                    <span class="top_details">Kurs starti: {{ course.course_start }}</span>
+                                    {% else %}
+                                    <span class="top_details">Kurs starti: boshlanmadi</span>
+                                    {% endif %}
+                                    {% if course.discount_status == "IS_ACTIVE" %}
+                                    <h5 class="pric">
+                                        <del>{{ course.discount_price }}</del>{{ course.course_price }}
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="pricen">
+                                        {{ course.course_price }}
+                                    </h5>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                            <a class="bottom_btn btn btn--bordered btn--arrow" href=course.html>kursga yozilish
+                                <i class="icon-arrow-right-solid icon"></i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                    {% endif %}
+                {% if course.name == "Python Advanced" %}
+                <li class="popular_list-card course-card col-12 col-md-6 col-lg-4" data-aos=fade-up data-aos-delay=50>
+                    <div class=course-card_wrapper>
+                        <div class="top d-flex align-items-start">
+                            <span class="top_icon top_icon--blue">
+                                <picture>
+                                    <source data-srcset={% static 'project/assets/img/python-logo.png' %} srcset={% static 'project/assets/img/python-logo.png' %}>
+                                    <img class=lazy data-src={% static 'project/assets/img/python-logo.png' %} src={% static 'project/assets/img/python-logo.png' %} alt=media>
+                                </picture>
+                            </span>
+                            <div class="wrapper d-flex flex-column">
+                                <h5 class=top_title style="font-size: 27px; line-height: 27px">Python <br> Advanced</h5>
+                                <span class=top_author>Pythonchi.uz</span>
+                            </div>
+                        </div>
+                        <div class=pricing>
+                            <span class="pricing_price h5">Darslar soni: {{ course.count_lesson }}</span>
+                        </div>
+                        <div class=bottom>
+                            <ul class=bottom_list>
+                                <li class="bottom_list-item d-flex align-items-start">
+                                    <i class="bottom_list-item_marker icon-circle"></i>
+                                    <p class=bottom_list-item_text>{{ course.description }}</p>
+                                </li>
+                            </ul>
+                            <ul class=botom_list style="border-top: 1px solid gray">
+                                <li class="botom_list-item d-flex align-items-start">
+                                    {% if course.course_start is not None %}
+                                    <span class="top_details">Kurs starti: {{ course.course_start }}</span>
+                                    {% else %}
+                                    <span class="top_details">Kurs starti: boshlanmadi</span>
+                                    {% endif %}
+                                    {% if course.discount_status == "IS_ACTIVE" %}
+                                    <h5 class="pric">
+                                        <del>{{ course.discount_price }}</del>{{ course.course_price }}
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="pricen">
+                                        {{ course.course_price }}
+                                    </h5>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                            <a class="bottom_btn btn btn--bordered btn--arrow" href=course.html>kursga yozilish
+                                <i class="icon-arrow-right-solid icon"></i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                    {% endif %}
+                    {% if course.name == "Telegram Bot" %}
+                <li class="popular_list-card course-card col-12 col-md-6 col-lg-4" data-aos=fade-up data-aos-delay=50>
+                    <div class=course-card_wrapper>
+                        <div class="top d-flex align-items-start">
+                            <span class="top_icon top_icon--sky">
+                                <picture>
+                                    <source data-srcset={% static 'project/assets/img/bot-icon.png' %} srcset={% static 'project/assets/img/bot-icon.png' %}>
+                                    <img class=lazy data-src={% static 'project/assets/img/bot-icon.png' %} src={% static 'project/assets/img/bot-icon.png' %} alt=media>
+                                </picture>
+                            </span>
+                            <div class="wrapper d-flex flex-column">
+                                <h5 class=top_title style="font-size: 27px; line-height: 27px">Python <br> Telegram Bot</h5>
+                                <span class=top_author>Pythonchi.uz</span>
+                            </div>
+                        </div>
+                        <div class=pricing>
+                            <span class="pricing_price h5">Darslar soni: {{ course.count_lesson }}</span>
+                        </div>
+                        <div class=bottom>
+                            <ul class=bottom_list>
+                                <li class="bottom_list-item d-flex align-items-start">
+                                    <i class="bottom_list-item_marker icon-circle"></i>
+                                    <p class=bottom_list-item_text>{{ course.description }}</p>
+                                </li>
+                            </ul>
+                            <ul class=botom_list style="border-top: 1px solid gray">
+                                <li class="botom_list-item d-flex align-items-start">
+                                    {% if course.course_start is not None %}
+                                    <span class="top_details">Kurs starti: {{ course.course_start }}</span>
+                                    {% else %}
+                                    <span class="top_details">Kurs starti: boshlanmadi</span>
+                                    {% endif %}
+                                    {% if course.discount_status == "IS_ACTIVE" %}
+                                    <h5 class="pric">
+                                        <del>{{ course.discount_price }}</del>{{ course.course_price }}
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="pricen">
+                                        {{ course.course_price }}
+                                    </h5>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                            <a class="bottom_btn btn btn--bordered btn--arrow" href=course.html>kursga yozilish
+                                <i class="icon-arrow-right-solid icon"></i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                    {% endif %}
+                    {% if course.name == "Django Basic" %}
+                <li class="popular_list-card course-card col-12 col-md-6 col-lg-4" data-aos=fade-up data-aos-delay=50>
+                    <div class=course-card_wrapper>
+                        <div class="top d-flex align-items-start">
+                            <span class="top_icon top_icon--green">
+                                <picture>
+                                    <source data-srcset={% static 'project/assets/img/django-logo.png' %} srcset={% static 'project/assets/img/django-logo.png' %}>
+                                    <img class=lazy data-src={% static 'project/assets/img/django-logo.png' %} src={% static 'project/assets/img/django-logo.png' %} alt=media>
+                                </picture>
+                            </span>
+                            <div class="wrapper d-flex flex-column">
+                                <h5 class=top_title style="font-size: 27px; line-height: 27px">Django <br> Basic</h5>
+                                <span class=top_author>Pythonchi.uz</span>
+                            </div>
+                        </div>
+                        <div class=pricing>
+                            <span class="pricing_price h5">Darslar soni: {{ course.count_lesson }}</span>
+                        </div>
+                        <div class=bottom>
+                            <ul class=bottom_list>
+                                <li class="bottom_list-item d-flex align-items-start">
+                                    <i class="bottom_list-item_marker icon-circle"></i>
+                                    <p class=bottom_list-item_text>{{ course.description }}</p>
+                                </li>
+                            </ul>
+                            <ul class=botom_list style="border-top: 1px solid gray">
+                                <li class="botom_list-item d-flex align-items-start">
+                                    {% if course.course_start is not None %}
+                                    <span class="top_details">Kurs starti: {{ course.course_start }}</span>
+                                    {% else %}
+                                    <span class="top_details">Kurs starti: boshlanmadi</span>
+                                    {% endif %}
+                                    {% if course.discount_status == "IS_ACTIVE" %}
+                                    <h5 class="pric">
+                                        <del>{{ course.discount_price }}</del>{{ course.course_price }}
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="pricen">
+                                        {{ course.course_price }}
+                                    </h5>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                            <a class="bottom_btn btn btn--bordered btn--arrow" href=course.html>kursga yozilish
+                                <i class="icon-arrow-right-solid icon"></i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                    {% endif %}
+                    {% if course.name == "Django Advanced" %}
+                <li class="popular_list-card course-card col-12 col-md-6 col-lg-4" data-aos=fade-up data-aos-delay=50>
+                    <div class=course-card_wrapper>
+                        <div class="top d-flex align-items-start">
+                            <span class="top_icon top_icon--green">
+                                <picture>
+                                    <source data-srcset={% static 'project/assets/img/django-logo.png' %} srcset={% static 'project/assets/img/django-logo.png' %}>
+                                    <img class=lazy data-src={% static 'project/assets/img/django-logo.png' %} src={% static 'project/assets/img/django-logo.png' %} alt=media>
+                                </picture>
+                            </span>
+                            <div class="wrapper d-flex flex-column">
+                                <h5 class=top_title style="font-size: 27px; line-height: 27px">Django <br> Advanced</h5>
+                                <span class=top_author>Pythonchi.uz</span>
+                            </div>
+                        </div>
+                        <div class=pricing>
+                            <span class="pricing_price h5">Darslar soni: {{ course.count_lesson }}</span>
+                        </div>
+                        <div class=bottom>
+                            <ul class=bottom_list>
+                                <li class="bottom_list-item d-flex align-items-start">
+                                    <i class="bottom_list-item_marker icon-circle"></i>
+                                    <p class=bottom_list-item_text>{{ course.description }}</p>
+                                </li>
+                            </ul>
+                            <ul class=botom_list style="border-top: 1px solid gray">
+                                <li class="botom_list-item d-flex align-items-start">
+                                    {% if course.course_start is not None %}
+                                    <span class="top_details">Kurs starti: {{ course.course_start }}</span>
+                                    {% else %}
+                                    <span class="top_details">Kurs starti: boshlanmadi</span>
+                                    {% endif %}
+                                    {% if course.discount_status == "IS_ACTIVE" %}
+                                    <h5 class="pric">
+                                        <del>{{ course.discount_price }}</del>{{ course.course_price }}
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="pricen">
+                                        {{ course.course_price }}
+                                    </h5>
+                                    {% endif %}
+                                </li>
+                            </ul>
+                            <a class="bottom_btn btn btn--bordered btn--arrow" href=course.html>kursga yozilish
+                                <i class="icon-arrow-right-solid icon"></i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+
+    <section class="subscribe" id="contact">
+        <div class="subscribe_circle">
+            <div class="subscribe_circle-circle">
+
+            </div>
+        </div>
+        <div class="subscribe_img">
+            <picture>
+                <source data-srcset="{% static 'project/assets/img/faq/setting.webp' %}" srcset="{% static 'project/assets/img/faq/setting.webp' %}">
+                <img class="lazy entered loaded" data-src="{% static 'project/assets/img/faq/setting.jpg' %}" src="{% static 'project/assets/img/faq/setting.jpg' %}" alt="media" data-ll-status="loaded">
+            </picture>
+        </div>
+        <div class="container">
+        <div class="banner_content">
+            <h4 class="banner_content-title aos-init aos-animate" data-aos="fade-up">Agar savollaringiz bo'lsa javob
+                olish uchun yoki kurs haqida qo'shimcha ma'lumot olish uchun biz bilan bog'laning
+            </h4>
+            <div class="wrapper aos-init aos-animate" data-aos="fade-up" data-aos-delay="50">
+                <a class="banner_content-btn btn btn--yellow" style="background: #f9d423; color: #29323c" href="pricing.html">Bog'lanish</a>
+            </div>
+        </div>
+        </div>
+
+    </section>
+</main>
+<footer class=footer>
+    <div class=container>
+        <div class="footer_wrapper d-sm-flex flex-wrap flex-lg-nowrap justify-content-lg-between">
+            <div class="footer_block col-sm-6 col-lg-auto" data-order=1>
+                <div class="logo logo--footer">
+                    <a class="d-inline-flex align-items-center" href=index.html>
+                        <span class=logo_picture>
+                            <img src={% static 'project/assets/img/pythonchi-logo.png' %} alt=Edison>
+                        </span>
+                    </a>
+                </div>
+                <p class=footer_block-text>Onlayn ta'lim va offline eventlarga
+                    ega birinchi Python dasturlash tiliga asoslangan kurs.
+                </p>
+                <ul class="footer_block-socials d-flex align-items-center">
+                    <li class=footer_block-socials_item>
+                        <a class=link href=https://www.instagram.com/pythonchi.uz/ target=_blank rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class=footer_block-socials_item>
+                        <a class=link href=https://www.t.me/pythonchiuz/ target=_blank rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class=footer_block-socials_item>
+                        <a class=link href=https://github.com/Pythonchiuz target=_blank rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+                <div class="wrapper d-flex flex-column">
+                    <a class="link link--contacts text text--sm d-inline-flex align-items-center" href=mailto:example@domain.com>
+                        <i class="icon-envelope icon"></i> pythonchiuz@gmail.com </a>
+                    <a class="link link--contacts text text--sm d-inline-flex align-items-center" href=tel:+123456789>
+                        <i class="icon-phone-solid icon"></i> +998977167441</a>
+                </div>
+            </div>
+            <div class="footer_block col-sm-6 col-lg-auto" data-order=2>
+                <h5 class=footer_block-header>Bo'limlar:</h5>
+                <ul class=footer_block-nav>
+                    <li class=footer_block-nav_item>
+                        <a class=link href=#home>Bosh Sahifa</a>
+                    </li>
+                    <li class=footer_block-nav_item>
+                        <a class=link href=#about>Biz Haqimizda</a>
+                    </li>
+                    <li class=footer_block-nav_item>
+                        <a class=link href=#coursed>Kurs Davomida</a>
+                    </li>
+                    <li class=footer_block-nav_item>
+                        <a class=link href=#course>Kurslarimiz</a>
+                    </li>
+                    <li class=footer_block-nav_item>
+                        <a class=link href=#contact>Bog'lanish</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer_block col-sm-6 col-lg-auto m-sm-0" data-order=3>
+                <h5 class=footer_block-header>Bizning Kurslarimiz:</h5>
+                <ul class=footer_block-list>
+                    <li class="footer_block-list_item d-flex align-items-baseline">
+                        <span class=marker></span>
+                        <a class=link href=#course>Python Basic</a>
+                    </li>
+                    <li class="footer_block-list_item d-flex align-items-baseline">
+                        <span class=marker></span>
+                        <a class=link href=#course>Python Advanaced</a>
+                    </li>
+                    <li class="footer_block-list_item d-flex align-items-baseline">
+                        <span class=marker></span>
+                        <a class=link href=#course>Python Telegram Bot</a>
+                    </li>
+                    <li class="footer_block-list_item d-flex align-items-baseline">
+                        <span class=marker></span>
+                        <a class=link href=#course>Django Basic</a>
+                    </li>
+                    <li class="footer_block-list_item d-flex align-items-baseline">
+                        <span class=marker></span>
+                        <a class=link href=#course>Django Advanced</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer_block col-sm-6 col-lg-auto" data-order=5>
+                <h5 class=footer_block-header>Instagram:</h5>
+                <ul style="padding-bottom: 9px" class=footer_block-nav>
+                    <li class=footer_block-nav_item>
+                        <a class=link href=https://www.instagram.com/pythonchi.uz/>https://www.instagram.com/pythonchi.uz/</a>
+                    </li>
+                </ul>
+                <h5 class=footer_block-header>Telegram:</h5>
+                <ul style="padding-bottom: 9px" class=footer_block-nav>
+                    <li class=footer_block-nav_item>
+                        <a class=link href=https://www.t.me/pythonchiuz/>https://www.t.me/pythonchiuz/</a>
+                    </li>
+                </ul>
+                <h5 class=footer_block-header>GitHub:</h5>
+                <ul style="padding-bottom: 9px" class=footer_block-nav>
+                    <li class=footer_block-nav_item>
+                        <a class=link href=https://github.com/Pythonchiuz>https://github.com/Pythonchiuz</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class=footer_secondary>
+        <div class="container d-flex flex-column flex-sm-row align-items-center justify-content-sm-between">
+            <a class=footer_secondary-scroll id=scrollToTop href=#home>
+                <i class="icon-angle-up icon"></i>
+            </a>
+            <p class=footer_secondary-copyright>Copyright @ <span id=currentYear></span> Pythonchi.uz</p>
+        </div>
+    </div>
+</footer>
+<script src=https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js></script>
+<script src={% static 'project/assets/js/common.min.js' %}></script>
+<script src=js/demo.js></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-J2SRB925J5"></script>
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        grabCursor: true,
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+        },
+        slidesPerGroup: 1,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+</script>
+</script>
+<script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-J2SRB925J5');</script>
+</body>
+</html>

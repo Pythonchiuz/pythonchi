@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% block head %}
+
+
+{% endblock head %}
+
+<body>
+
+  {% include 'layout/nav.html' %}
+
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+        {% block nav %}
+
+
+        {% endblock nav %}
+        {% include 'layout/sidebar.html' %}
+    </ul>
+  </aside>
+
+
+
+
+
+  {% block main %}
+
+
+  {% endblock main %}
+
+
+  {% block footer %}
+  <!-- ======= Footer ======= -->
+
+
+  {% endblock footer %}
+
+
+  {% block js %}
+
+
+  {% endblock js %}
+
+</body>
+
+</html>
