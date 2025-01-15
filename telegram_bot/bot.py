@@ -24,7 +24,7 @@ def reset_user_state(chat_id):
 def start_handler(message):
     chat_id = message.chat.id
     user_states[chat_id] = {"step": "username"}
-    bot.send_message(chat_id, "👋 Добро пожаловать! Введите ваш *username*.", parse_mode="Markdown")
+    bot.send_message(chat_id, "👋 Assalomu aleykum! *Ismingizni* yozing.", parse_mode="Markdown")
 
 @bot.message_handler(func=lambda message: message.chat.id in user_states)
 def login_handler(message):
@@ -39,20 +39,20 @@ def login_handler(message):
             if user.is_superuser:
                 state["is_admin"] = True
                 state["step"] = "password"
-                bot.send_message(chat_id, "Вы являетесь администратором. Введите ваш *пароль*.", parse_mode="Markdown")
+                bot.send_message(chat_id, "Siz administratorsiz. *Parolingizni* yozing.", parse_mode="Markdown")
             else:
                 state["is_admin"] = False
                 state["step"] = "last_name"
-                bot.send_message(chat_id, "Введите вашу *фамилию*.", parse_mode="Markdown")
+                bot.send_message(chat_id, "*Familiyangizni* yozing.", parse_mode="Markdown")
         except User.DoesNotExist:
             state["is_admin"] = False
             state["step"] = "last_name"
-            bot.send_message(chat_id, "Введите вашу *фамилию*.", parse_mode="Markdown")
+            bot.send_message(chat_id, "*Familiyangizni* yozing.", parse_mode="Markdown")
 
     elif state["step"] == "last_name":
         state["last_name"] = message.text
         state["step"] = "password"
-        bot.send_message(chat_id, "Введите ваш *пароль*.", parse_mode="Markdown")
+        bot.send_message(chat_id, "*Parolingizni* yozing.", parse_mode="Markdown")
 
     elif state["step"] == "password":
         state["password"] = message.text
@@ -64,14 +64,14 @@ def login_handler(message):
                     if not admin_user.telegram_chat_id:
                         admin_user.telegram_chat_id = chat_id
                         admin_user.save()
-                        bot.send_message(chat_id, "✅ Вы вошли как администратор и ваш Telegram ID был сохранен.")
+                        bot.send_message(chat_id, "✅ Siz administrator sifatida ro'yxatdan o'tdingiz")
                     else:
-                        bot.send_message(chat_id, "✅ Вы вошли как администратор.")
+                        bot.send_message(chat_id, "✅ Siz administrator sifatida ro'yxatdan o'tdingiz.")
                 else:
                     bot.send_message(chat_id,
-                                     "❌ Неверный пароль администратора. Попробуйте снова, отправив команду /start.")
+                                     "❌ Nato'g'ri parol kiritildi. Boshqattan harakat qilib ko'rin, /start buyrug'ini yuborib.")
             except User.DoesNotExist:
-                bot.send_message(chat_id, "❌ Администратор не найден. Попробуйте снова, отправив команду /start.")
+                bot.send_message(chat_id, "❌ Administrator nato'g'ri kiritildi. Boshqattan harakat qilib ko'rin, /start buyrug'ini yuborib.")
             finally:
                 reset_user_state(chat_id)
         else:
@@ -80,15 +80,14 @@ def login_handler(message):
                 if student.password == state["password"]:
                     student.telegram_chat_id = chat_id
                     student.save()
-                    bot.send_message(chat_id, f"✅ Добро пожаловать, {student.username}!")
+                    bot.send_message(chat_id, f"✅ Xush kelibsiz, {student.username}!")
                 else:
-                    bot.send_message(chat_id, "❌ Неверный пароль. Попробуйте снова, отправив команду /start.")
+                    bot.send_message(chat_id, "❌ Nato'g'ri parol kiritildi. Boshqattan harakat qilib ko'rin, /start buyrug'ini yuborib.")
             except Student.DoesNotExist:
-                bot.send_message(chat_id, "❌ Неверные данные. Попробуйте снова, отправив команду /start.")
+                bot.send_message(chat_id, "❌ Nato'gri ma'lumotlar kiritildi. Boshqattan harakat qilib ko'rin, /start buyrug'ini yuborib.")
             finally:
                 reset_user_state(chat_id)
 
 
 if __name__ == "__main__":
-    print("Бот запущен. Ожидание сообщений...")
     bot.infinity_polling()

@@ -29,13 +29,10 @@ def notify_admin_student(sender, instance, created, **kwargs):
                         f"📎 Link: {instance.homework}\n"
                     )
                     bot.send_message(chat_id, message)
-                    print(f"✅ Сообщение отправлено администратору {admin_user.username} (chat_id={chat_id})")
                 else:
-                    print(f"⚠️ Telegram ID не указан для администратора {admin_user.username}")
-            else:
-                print("⚠️ Администратор с username='pythonchi-admin' не найден.")
+                    print(f"⚠️ Telegram ID {admin_user.username}")
         except Exception as e:
-            print(f"❌ Ошибка при отправке уведомления для администратора: {e}")
+            print(f"❌ Ошибка: {e}")
 
     elif instance.comment_status == "IS_ACTIVE":
         if instance.homework_status == "IS_ACTIVE":
@@ -64,16 +61,15 @@ def notify_admin_student(sender, instance, created, **kwargs):
         if chat_id:
             bot.send_message(chat_id, message)
         else:
-            print(f"⚠️ Telegram ID не найден для студента {instance.student.username}")
-    else:
-        print("Нет действий для текущего изменения.")
+            print(f"⚠️ Telegram ID {instance.student.username}")
+    
 
 
 @receiver(post_save, sender=Chat)
 def notify_group_students(sender, instance, created, **kwargs):
 
     try:
-        print(f"Обработка сигнала для Chat. created={created}, status={instance.status}")
+        print(f"created={created}, status={instance.status}")
 
         if instance.status == "IS_ACTIVE":
             if instance.lesson_link is not None:
@@ -90,17 +86,13 @@ def notify_group_students(sender, instance, created, **kwargs):
                 )
 
             students = instance.group.student.all()
-            print(f"Найдено {students.count()} студентов в группе.")
 
             for student in students:
                 chat_id = student.telegram_chat_id
-                print(f"Обработка студента {student.username}. chat_id={chat_id}")
 
                 if chat_id:
                     bot.send_message(chat_id, message)
                 else:
-                    print(f"⚠️ Telegram ID не найден для студента {student.username}")
-        else:
-            print(f"Пропущено уведомление для объекта Chat: статус {instance.status}")
+                    print(f"⚠️ Telegram ID {student.username}")
     except Exception as e:
-        print(f"Ошибка обработки сигнала Chat: {e}")
+        print(f"Ошибка: {e}")

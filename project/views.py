@@ -108,7 +108,6 @@ def homeworks(request, student_id, pk, name):
                    "moduls": moduls})
 
 def homework(request, student_id, pk, name, title):
-    # Получение данных из базы
     student = Student.objects.get(student_id=student_id)
     group = Group.objects.get(pk=pk)
     modul = Modul.objects.get(name=name)
@@ -117,45 +116,21 @@ def homework(request, student_id, pk, name, title):
     moduls = ModulStatus.objects.all().filter(group=group)
     lesson = Lesson.objects.all().filter(modul__name=modul.name)
 
-    # Проверка, отправлено ли задание
     task_is_submitted = Task.objects.filter(student=student, group=group, modul=modul, hw=homework).exists()
 
-    # Если задание уже отправлено, показываем его
     if task_is_submitted:
         task = Task.objects.get(student=student, group=group, modul=modul, hw=homework)
-        return render(request, "project/homework.html", {
-            "modul": modul,
-            "lesson": lesson,
-            "group": group,
-            "student": student,
-            "homework": homework,
-            "homeworks": homeworks,
-            "task": task,
-            "moduls": moduls,
-            "task_is_submitted": task_is_submitted
-        })
+        return render(request, "project/homework.html", {"modul": modul, "lesson": lesson, "group": group, "student": student, "homework": homework, "homeworks": homeworks, "task": task, "moduls": moduls, "task_is_submitted": task_is_submitted})
 
-    # Если задание не отправлено, обрабатываем форму
     if request.method == "POST":
         homework_text = request.POST.get('homework')
 
-        # Создание новой задачи
         task = Task(student=student, group=group, modul=modul, hw=homework, homework=homework_text)
         task.save()
 
         return redirect('homework', student_id=student.student_id, pk=group.pk, name=modul.name, title=homework.title)
 
-    # Отображаем страницу, если задание не отправлено
-    return render(request, "project/homework.html", {
-        "modul": modul,
-        "group": group,
-        "lesson": lesson,
-        "student": student,
-        "homework": homework,
-        "homeworks": homeworks,
-        "moduls": moduls,
-        "task_is_submitted": task_is_submitted
-    })
+    return render(request, "project/homework.html", {"modul": modul, "group": group, "lesson": lesson, "student": student, "homework": homework, "homeworks": homeworks, "moduls": moduls, "task_is_submitted": task_is_submitted})
 
 
 @login_required
